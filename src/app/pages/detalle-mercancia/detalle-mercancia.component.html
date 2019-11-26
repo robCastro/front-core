@@ -1,0 +1,91 @@
+<div *ngIf="isMercanciaLoaded; then thenMercanciaBlock else elseMercanciaBlock"></div>
+
+<ng-template #thenMercanciaBlock>
+	<div class="row">
+		<h4>Detalles de Mercancia</h4>
+	</div>
+
+	<div class="row mx-auto justify-content-center">
+		<h5>{{mercancia.descripcion_mercancia}}</h5>
+	</div>
+
+	<div class="row mt-5 justify-content-center">
+		<div class="col-sm-3">Cantidad: {{ mercancia.cantidad_mercancia }} Unidades</div>
+		<div class="col-sm-3">Tipo: {{ mercancia.tipo_mercancium.descripcio_tipo_mercancia }}</div>
+		<div class="col-sm-3">CIF: {{ mercancia.valor_mercancia*1.0 + mercancia.seguro_mercancia*1.0 + mercancia.flete_mercancia*1.0 }}</div>
+	</div>
+
+	<div class="row mt-5 justify-content-center">
+		<div class="col-md-6 ">	
+			<div class="card card-info mx-4">
+				<div class="card-header card-header-warning mb-2">
+      				Envia
+    			</div>
+				<div class="card-body" style="border-top-style: dashed; border-top: 2px solid #51cbce;">
+					<h4 class="card-title mt-0">{{mercancia.envia.nombres_responsable}} {{mercancia.envia.apellidos_responsable}}</h4>
+					<p class="card-text">Desde {{mercancia.envia.pais.nombre_pais}}.</p>
+					<a href="#" class="btn btn-primary">Ver más</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6 ">
+			<div class="card card-info mx-4">
+				<div class="card-header card-header-warning mb-2">
+      				Recibe
+    			</div>
+				<div class="card-body" style="border-top-style: dashed; border-top: 2px solid #51cbce;">
+					<h4 class="card-title mt-0">{{mercancia.recibe.nombres_responsable}} {{mercancia.recibe.apellidos_responsable}}</h4>
+					<p class="card-text">Desde {{mercancia.recibe.pais.nombre_pais}}.</p>
+					<a href="#" class="btn btn-primary">Ver más</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<h4>Pasos por Aduana</h4>
+	</div>
+
+	<div class="row mt-2">
+		<div *ngIf="isDetallesLoaded; then thenDetallesBlock else elseDetallesBlock"></div>
+		<ng-template #thenDetallesBlock>
+			<div class="col-12" *ngFor="let detalle of detalles">
+				<div class="card card-nav-tabs mx-4">
+					<div class="card-header card-header-warning mb-2">
+	      				{{ detalle.nombre_aduana}}
+	    			</div>
+					<div class="card-body" style="border-top-style: dashed; border-top: 2px solid #51cbce;">
+						<div class="row m-3 ">
+							<div class="col-sm-3">
+								<div class="row"><p class="card-text">Fecha de Registro</p></div>
+								<div class="row"><p class="card-text">{{detalle.fecha_registro}}</p></div>
+							</div>
+							<div class="col-sm-3">
+								<div class="row"><p class="card-text">Pago total</p></div>
+								<div class="row"><p class="card-text">{{((mercancia.valor_mercancia*1.0 + mercancia.seguro_mercancia*1.0 + mercancia.flete_mercancia*1.0)*detalle.otras_tasas + detalle.total_recargos*1.0 ) | number:'1.2-2'}}</p></div>
+							</div>
+							<div class="col-sm-3">
+								<div class="row"><p class="card-text">Estado</p></div>
+								<div class="row"><p class="card-text">{{detalle.estado}}</p></div>
+							</div>
+							<div class="col-sm-3">
+								<div class="row"><p class="card-text">Descripcion Estado</p></div>
+								<div class="row"><p class="card-text">{{detalle.descripcion_estado}}</p></div>
+							</div>
+						</div>
+						<div class="row m-3">
+							<textarea rows="10" style="height: 120px; width: 100%" readonly="">{{detalle.info_extra}}</textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+		</ng-template>
+		<ng-template #elseDetallesBlock>
+			<h4>Cargando</h4>
+		</ng-template>
+	</div>
+</ng-template>
+
+<ng-template #elseMercanciaBlock>
+	<h4>Cargando</h4>
+</ng-template>

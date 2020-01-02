@@ -13,7 +13,7 @@ import { Detalle } from '../models/detalle';
 })
 export class MercanciaService {
 
-	private urlBase = url.desarrollo;
+	private urlBase = url.produccion;
 
 
 	constructor(

@@ -8,6 +8,7 @@ import { AdminLayoutRoutes } from './admin-layout.routing';
 
 
 import { DetalleMercanciaComponent } from '../../pages/detalle-mercancia/detalle-mercancia.component';
+import { PasoPluginAComponent } from '../../pages/paso-plugin-a/paso-plugin-a.component';
 
 
 import { DashboardComponent }       from '../../pages/dashboard/dashboard.component';
@@ -30,6 +31,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   ],
   declarations: [
     DetalleMercanciaComponent,
+    PasoPluginAComponent,
     DashboardComponent,
     UserComponent,
     TableComponent,

@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 
 import { DetalleMercanciaComponent } from '../../pages/detalle-mercancia/detalle-mercancia.component';
+import { PasoPluginAComponent } from '../../pages/paso-plugin-a/paso-plugin-a.component';
 import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
 import { UserComponent } from '../../pages/user/user.component';
 import { TableComponent } from '../../pages/table/table.component';
@@ -12,6 +13,7 @@ import { UpgradeComponent } from '../../pages/upgrade/upgrade.component';
 
 export const AdminLayoutRoutes: Routes = [
 	{ path: 'detalle_mercancia',component: DetalleMercanciaComponent },
+	{ path: 'paso_plugin_a',    component: PasoPluginAComponent },
     { path: 'dashboard',      	component: DashboardComponent },
     { path: 'user',           	component: UserComponent },
     { path: 'table',          	component: TableComponent },

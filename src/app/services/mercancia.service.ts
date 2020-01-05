@@ -20,8 +20,12 @@ export class MercanciaService {
 		private http: HttpClient,
 	) { }
 
-	public getMercancia(id_mercancia: number): Observable<Mercancia>{
-		return this.http.get(`${this.urlBase}mercancia/${id_mercancia}`) as Observable<Mercancia>;
+	public getMercancia(id_mercancia: number, privado?: boolean): Observable<Mercancia>{		
+		if(privado){
+			return this.http.get(`${this.urlBase}mercancia/${id_mercancia}?privado=true`) as Observable<Mercancia>;
+		}else{
+			return this.http.get(`${this.urlBase}mercancia/${id_mercancia}`) as Observable<Mercancia>;
+		}
 	}
 
 	public getDetalles(id_mercancia: number): Observable<any>{

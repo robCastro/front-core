@@ -38,7 +38,7 @@
 						</div>
 				</div>
 				<div class="row">
-						<button (click)="buscarMercancia()">Buscar</button>
+						<button class="btn btn-secondary" (click)="buscarMercancia()">Buscar</button>
 				</div>
 				<p>
 			</div>
@@ -63,7 +63,7 @@
 						</div>
 				</div>
 				<div class="row">
-						<button (click)="buscarTransporte()">Buscar</button>
+						<button class="btn btn-secondary" (click)="buscarTransporte()">Buscar</button>
 				</div>
 			</div>
 		</div>
@@ -139,7 +139,7 @@
 		<label for="txtTotalivaS" class="col-md-12 col-form-label"><strong>{{pagoArancel == null || pagoIva == null || multa == null ? "--" : pagoArancel + pagoIva + multa}}</strong></label>
 	</div>
 	<div class="col-md-4">
-		<button type="button" class="btn btn-primary">Guardar</button>
+		<button type="button" (click)="guardarPaso()" class="btn btn-primary">Guardar</button>
 	</div>
 </div>
 

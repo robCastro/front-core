@@ -7,12 +7,14 @@ import { TransporteService } from '../../services/transporte.service';
 import { IvaService } from '../../services/plugin_a/iva.service';
 import { ArancelService } from '../../services/plugin_a/arancel.service';
 import { AduanaService } from '../../services/plugin_a/aduana.service';
+import { PasaService } from '../../services/plugin_a/pasa.service';
 
 import { Mercancia } from '../../models/mercancia';
 import { Transporte } from '../../models/transporte';
 import { Iva } from '../../models/plugin_a/iva';
 import { Arancel } from '../../models/plugin_a/arancel';
 import { Aduana } from '../../models/plugin_a/aduana';
+import { Pasa } from '../../models/plugin_a/pasa';
 
 @Component({
   selector: 'app-paso-plugin-a',
@@ -28,6 +30,7 @@ export class PasoPluginAComponent implements OnInit {
 	public iva: Iva;
 	public arancel: Arancel;
 	public aduana: Aduana;
+	public pasa: Pasa;
 
 
 	public cif: number;
@@ -45,6 +48,7 @@ export class PasoPluginAComponent implements OnInit {
 		private ivaService: IvaService,
 		private arancelService: ArancelService,
 		private aduanaService: AduanaService,
+		private pasaService: PasaService
 	) { }
 
 	ngOnInit() {
@@ -128,6 +132,51 @@ export class PasoPluginAComponent implements OnInit {
 			error => {
 				this.displayError(error);
 				this.transporte = null;
+			}
+		)
+	}
+
+	public guardarPaso(){
+		this.displayProcesando(true);
+		if (this.mercancia == null){
+			this.displayError({error: {msg: 'Busque la mercancia'}});
+			return;
+		}
+		if (this.transporte == null){
+			this.displayError({error: {msg: 'Busque el transporte'}});
+			return;
+		}
+		this.pasa = new Pasa();
+		this.pasa.aduana = this.aduana;
+		this.pasa.iva = this.iva;
+		this.pasa.arancel = this.arancel;
+		this.pasa.id_transporte = this.transporte[0].id_transporte;
+		this.pasa.id_mercancia = this.mercancia.id_mercancia;
+		this.pasa.multa_pasa = this.multa;
+		this.pasa.retenida_pasa = false;
+		this.pasaService.postPasa(this.pasa).subscribe(
+			pasa => {
+				Swal.fire({
+					title: 'Guardado!',
+					text: 'Paso guardado',
+					icon: 'success',
+					showConfirmButton: false,
+					allowOutsideClick: false,
+	  				allowEscapeKey: false,
+					timer: 3000,
+					timerProgressBar: true
+				});
+				this.pasa = null;
+				this.aduana = null;
+				this.iva = null;
+				this.arancel = null;
+				this.transporte = null;
+				this.mercancia = null;
+				this.multa = 0;
+			},
+			error => {
+				this.displayError(error);
+				this.pasa = null;
 			}
 		)
 	}

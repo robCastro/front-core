@@ -5,7 +5,7 @@ import { Responsable as Recibe } from './responsable';
 
 export class Mercancia {
 	id_mercancia:number;
-	tipo_mercancia: TipoMercancia;
+	tipo_mercancium: TipoMercancia;
 	envia: Envia;
 	recibe: Recibe;
 	descripcion_mercancia: string;

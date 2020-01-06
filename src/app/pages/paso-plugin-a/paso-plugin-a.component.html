@@ -99,7 +99,7 @@
 				<div class="row">
 						<label for="txtcif" class="col-md-3 col-form-label"><strong>CIF:</strong></label>
 						<div class="col-md-3">
-							<label for="txtTotal" class="col-md-12 col-form-label"><strong>{{mercancia == null ? "--" : mercancia.seguro_mercancia*1.0 + mercancia.valor_mercancia*1.0 + mercancia.flete_mercancia*1.0}}</strong></label>
+							<label for="txtTotal" class="col-md-12 col-form-label"><strong>{{cif == null ? "--" : cif}}</strong></label>
 						</div>
 				</div>
 
@@ -110,23 +110,23 @@
 						</div>
 						<label for="txtArancel" class="col-md-3 col-form-label"><strong>Arancel:</strong></label>
 						<div class="col-md-3">
-							<label for="txtArancelS" class="col-md-12 col-form-label"><strong>&lt;&lt;%%&gt;&gt;</strong></label>
+							<label for="txtArancelS" class="col-md-12 col-form-label"><strong>{{tasaArancel == null ? "--" : tasaArancel*100 + '%'}}</strong></label>
 						</div>
 				</div>
 				<div class="row">
 						<label for="txtTotaliva" class="col-md-3 col-form-label"><strong> Total IVA:</strong></label>
 						<div class="col-md-3">
-							<label for="txtTotalivaS" class="col-md-12 col-form-label"><strong>{{iva == null || mercancia == null ? "--" : iva.tasa_iva * (mercancia.seguro_mercancia*1.0 + mercancia.valor_mercancia*1.0 + mercancia.flete_mercancia*1.0)}}</strong></label>
+							<label for="txtTotalivaS" class="col-md-12 col-form-label"><strong>{{pagoIva == null ? "--" : pagoIva}}</strong></label>
 						</div>
 						<label for="txtTotalArancel" class="col-md-3 col-form-label"><strong>Total Arancel:</strong></label>
 						<div class="col-md-3">
-							<label for="txtTotalArancelS" class="col-md-12 col-form-label"><strong>&lt;&lt;%%&gt;&gt;</strong></label>
+							<label for="txtTotalArancelS" class="col-md-12 col-form-label"><strong>{{pagoArancel == null ? "--" : pagoArancel}}</strong></label>
 						</div>
 				</div>
 				<div class="row">
 						<label for="txtMulta" class="col-md-3 col-form-label"><strong>Multa:</strong></label>
 						<div class="col-md-3">
-							<input type="number" name="pasoMulta"  class="form-control" min="0">
+							<input type="number" value="0" name="pasoMulta" [(ngModel)]="multa"  class="form-control" min="0">
 						</div>
 				</div>
 			</div>
@@ -136,7 +136,7 @@
 <div class="row" style="text-align: center;">
 	<label for="txtTotal" class="col-md-3 col-form-label"><strong> Total:</strong></label>
 	<div class="col-md-5">
-		<label for="txtTotalivaS" class="col-md-12 col-form-label"><strong>&lt;&lt;Total IVA + Total Arancel + Total Multa&gt;&gt;</strong></label>
+		<label for="txtTotalivaS" class="col-md-12 col-form-label"><strong>{{pagoArancel == null || pagoIva == null || multa == null ? "--" : pagoArancel + pagoIva + multa}}</strong></label>
 	</div>
 	<div class="col-md-4">
 		<button type="button" class="btn btn-primary">Guardar</button>

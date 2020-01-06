@@ -4,7 +4,7 @@ import { Aduana } from './aduana';
 
 export class Pasa {
 	id_pasa:number;
-	id_fecha_pasa: Date;
+	fecha_pasa: Date;
 	retenida_pasa: boolean;
 	multa_pasa: number;
 	id_transporte:number;

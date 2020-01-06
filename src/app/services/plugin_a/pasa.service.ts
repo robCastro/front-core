@@ -12,7 +12,7 @@ import { Pasa } from '../../models/plugin_a/pasa';
 })
 export class PasaService {
 
-	private urlBase = url.desarrollo;
+	private urlBase = url.produccion;
 
 	constructor(
 		private http: HttpClient,

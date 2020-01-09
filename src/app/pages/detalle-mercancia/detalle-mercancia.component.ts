@@ -3,6 +3,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import Swal from 'sweetalert2';
 
 import { MercanciaService } from '../../services/mercancia.service';
+import { SocketService } from '../../services/socket.service';
 
 import { Mercancia } from '../../models/mercancia';
 import { Detalle } from '../../models/detalle';
@@ -22,6 +23,7 @@ export class DetalleMercanciaComponent implements OnInit {
 	constructor(
 		private mercanciaService: MercanciaService,
 		private route: ActivatedRoute,
+		private socketService: SocketService,
 	) { }
 
 	ngOnInit() {
@@ -49,6 +51,38 @@ export class DetalleMercanciaComponent implements OnInit {
 					this.displayError(error);
 				}
 			);
+			this.socketService.listen('nuevo_detalle').subscribe((id_mercancia: number) => {
+				if(id_mercancia === this.mercancia.id_mercancia){
+					Swal.fire({
+						title: 'Actualizando!',
+						text: 'Nuevo Paso detectado, actualizando',
+						icon: 'info',
+						position: 'bottom-end',
+						showConfirmButton: false,
+						timer: 2000
+					});
+					this.mercanciaService.getDetalles(id_mercancia).subscribe(
+						respuesta => {
+							this.detalles = respuesta.detalles;
+							this.isDetallesLoaded = true;
+							console.log('Errores: ', respuesta.errores);
+							Swal.fire({
+								title: 'Actualizado!',
+								text: 'Se han añadido nuevos pasos',
+								icon: 'success',
+								position: 'bottom-end',
+								showConfirmButton: false,
+								timer: 2000
+							});
+							if(respuesta.errores)
+								this.displayError({error: {msg: respuesta.errores}});
+							console.log(this.detalles);
+						}, error => {
+							this.displayError(error);
+						}
+					);
+				}
+			});
 		});
 
 	}

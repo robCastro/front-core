@@ -62,7 +62,7 @@
 							</div>
 							<div class="col-sm-3">
 								<div class="row"><p class="card-text">Pago total</p></div>
-								<div class="row"><p class="card-text">{{((mercancia.valor_mercancia*1.0 + mercancia.seguro_mercancia*1.0 + mercancia.flete_mercancia*1.0)*detalle.otras_tasas + detalle.total_recargos*1.0 ) | number:'1.2-2'}}</p></div>
+								<div class="row"><p class="card-text">{{((mercancia.valor_mercancia*1.0 + mercancia.seguro_mercancia*1.0 + mercancia.flete_mercancia*1.0)*(detalle.otras_tasas*1.0 + detalle.tasa_paso*1.0) + detalle.total_recargos*1.0 ) | number:'1.2-2'}}</p></div>
 							</div>
 							<div class="col-sm-3">
 								<div class="row"><p class="card-text">Estado</p></div>
